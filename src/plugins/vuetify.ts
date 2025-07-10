@@ -9,11 +9,24 @@ import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
 // Composables
+import { usePreferredColorScheme } from '@vueuse/core'
 import { createVuetify } from 'vuetify'
 
+const preferredColor = usePreferredColorScheme()
+
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
-export default createVuetify({
+const vuetify = createVuetify({
   theme: {
-    defaultTheme: 'dark',
+    defaultTheme: preferredColor.value,
   },
 })
+
+watch(
+  preferredColor,
+  (newVal) => {
+    vuetify.theme.global.name.value = newVal
+  },
+  { immediate: true },
+)
+
+export default vuetify
