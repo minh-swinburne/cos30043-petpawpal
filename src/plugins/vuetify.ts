@@ -11,6 +11,7 @@ import 'vuetify/styles'
 // Composables
 import { usePreferredColorScheme } from '@vueuse/core'
 import { createVuetify } from 'vuetify'
+import { indigo, blue } from 'vuetify/lib/util/colors'
 
 const preferredColor = usePreferredColorScheme()
 
@@ -18,6 +19,20 @@ const preferredColor = usePreferredColorScheme()
 const vuetify = createVuetify({
   theme: {
     defaultTheme: preferredColor.value,
+    themes: {
+      light: {
+        colors: {
+          primary: indigo.base,
+          secondary: blue.base,
+        },
+      },
+      dark: {
+        colors: {
+          primary: indigo.base,
+          secondary: blue.base,
+        },
+      },
+    },
   },
 })
 
